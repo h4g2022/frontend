@@ -12,11 +12,16 @@ const Header: FC<Props> = () => {
         <Link href="/" passHref>
           Homepage
         </Link>
-        <nav>
+        <nav className="flex gap-x-4">
           {!auth ? (
-            <Link href="/login">
-              <button>Login</button>
-            </Link>
+            <Fragment>
+              <Link href="/login">
+                <button>Login</button>
+              </Link>
+              <Link href="/forum">
+                <button>Forum</button>
+              </Link>
+            </Fragment>
           ) : (
             <Fragment>
               <button>View Patients</button>
