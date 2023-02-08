@@ -1,11 +1,17 @@
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment, useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { UserContext } from "@/pages/provider/UserProvider";
 
 interface Props {}
 
 // eslint-disable-next-line arrow-body-style
 const Header: FC<Props> = () => {
-  const [auth, setAuth] = useState();
+  const { auth } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(auth);
+  }, [auth]);
+
   return (
     <div className="shadow-lg">
       <header className="flex items-center justify-between w-full h-16 section">

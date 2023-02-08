@@ -1,5 +1,5 @@
-import Posts from "./components/posts";
 import UserInput from "./components/UserInput";
+import Posts from "./components/Posts";
 
 const Index = () => {
   return (

@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Index = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setError("");
     if (!email || !password || !confirm) {
       setError("Missing fields");
@@ -16,6 +18,38 @@ const Index = () => {
       setError("Invalid email");
       return;
     }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      setError("Invalid credentials");
+    }
+
+    const data = await res.json();
+    console.log(data);
+    localStorage.setItem(
+      "auth",
+      JSON.stringify({
+        access_token: data.access_token,
+        refresh_token: data.refresh_token,
+      })
+    );
+
+    router.push("/");
+
+    return;
   };
 
   return (

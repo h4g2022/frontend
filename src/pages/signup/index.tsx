@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Index = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const router = useRouter();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setError("");
     if (!email || !password || !confirm) {
       setError("Missing fields");
@@ -27,6 +29,33 @@ const Index = () => {
       setError("Invalid email");
       return;
     }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/create`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+          type: "patient",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(res);
+
+    if (!res.ok) {
+      setError("Invalid credentials");
+      return;
+    }
+
+    const data = await res.json();
+    router.push("/login");
+
+    console.log(data);
+    return;
   };
 
   return (
