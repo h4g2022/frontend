@@ -4,14 +4,8 @@ import { UserContext } from "@/pages/provider/UserProvider";
 
 interface Props {}
 
-// eslint-disable-next-line arrow-body-style
 const Header: FC<Props> = () => {
   const { auth } = useContext(UserContext);
-
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
-
   return (
     <div className="shadow-lg">
       <header className="flex items-center justify-between w-full h-16 section">
@@ -30,8 +24,12 @@ const Header: FC<Props> = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <button>View Patients</button>
-              <button>Forum</button>
+              <Link href="/user">
+                <button>View Patients</button>
+              </Link>
+              <Link href="/forum">
+                <button>Forum</button>
+              </Link>
             </Fragment>
           )}
         </nav>

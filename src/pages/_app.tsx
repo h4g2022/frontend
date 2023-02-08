@@ -5,7 +5,9 @@ import UserProvider from "./provider/UserProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider publicPaths={["/", "/login", "/signup", "/forum"]}>
+    <UserProvider
+      publicPaths={["/", "/login", "/signup", "/forum", "/signup/details"]}
+    >
       <>
         <Header />
         <Component {...pageProps} />

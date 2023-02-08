@@ -8,18 +8,23 @@ const Index = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/all`).then((res) => {
-      if (!res.ok) {
-        setError("Error loading");
-      }
-    });
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/all`)
+      .then((res) => {
+        if (!res.ok) {
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   });
 
   return (
-    <div>
-      <div className="text-4xl font-semibold">Users</div>
+    <div className="section my-12">
+      <div className="text-4xl font-semibold mb-8">Users</div>
       <div className="flex flex-col gap-y-6">
-        {loading ? <div>Loading...</div> : <div></div>}
+        {!data ? <div>No data</div> : <div></div>}
       </div>
     </div>
   );

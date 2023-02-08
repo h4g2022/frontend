@@ -25,7 +25,6 @@ const UserProvider = ({
     const notAuth = async () => {
       setAuth(false);
       if (publicPaths.indexOf(router.pathname || "") === -1) {
-        console.log("hi");
         await router.push("/login");
       }
       setLoading(false);
@@ -37,7 +36,6 @@ const UserProvider = ({
     }
 
     const localData = JSON.parse(value);
-    console.log(localData);
 
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/refresh`, {
       method: "POST",
@@ -54,17 +52,12 @@ const UserProvider = ({
       }
 
       return res.json().then((data) => {
-        console.log("**", data);
         setAuth(true);
         localData.access_token = data.access_token;
         setLoading(false);
       });
     });
   }, [router, publicPaths]);
-
-  useEffect(() => {
-    console.log("look", auth, loading);
-  }, [auth, loading]);
 
   return loading ? (
     <div>Loading...</div>
