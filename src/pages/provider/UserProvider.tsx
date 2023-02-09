@@ -36,8 +36,7 @@ const UserProvider = ({
     }
 
     const localData = JSON.parse(value);
-
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/refresh`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}auth/refresh`, {
       method: "POST",
       body: JSON.stringify({
         refresh_token: localData.refresh_token,

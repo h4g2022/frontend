@@ -6,6 +6,7 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [type, setType] = useState("");
   const router = useRouter();
 
   const onSubmit = async () => {
@@ -37,14 +38,13 @@ const Index = () => {
         body: JSON.stringify({
           email,
           password,
-          type: "patient",
+          type,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
-    console.log(res);
 
     if (!res.ok) {
       setError("Invalid credentials");
@@ -54,7 +54,6 @@ const Index = () => {
     const data = await res.json();
     router.push("/login");
 
-    console.log(data);
     return;
   };
 
@@ -105,6 +104,35 @@ const Index = () => {
             value={confirm}
             onChange={(e) => setConfirm(e.currentTarget.value)}
           />
+        </div>
+        <div>
+          <label htmlFor="skills" className="mb-2">
+            Choose your type of user
+          </label>
+          <div className="flex gap-x-2">
+            <div className="flex items-center gap-x-2">
+              <label>
+                <input
+                  value="talent"
+                  type="radio"
+                  checked={type === "talent"}
+                  onChange={(e) => setType(e.currentTarget.value)}
+                />
+                <span className="ml-2">Talent</span>
+              </label>
+            </div>
+            <div className="flex items-center gap-x-2">
+              <label>
+                <input
+                  value="employer"
+                  type="radio"
+                  checked={type === "employer"}
+                  onChange={(e) => setType(e.currentTarget.value)}
+                />
+                <span className="ml-2">Employer</span>
+              </label>
+            </div>
+          </div>
         </div>
         <button
           className="bg-black px-6 py-4 rounded-xl text-white hover:bg-opacity-80"
