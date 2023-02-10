@@ -27,8 +27,8 @@ const Header: FC<Props> = () => {
               <Link href="/signup">
                 <button>Sign up</button>
               </Link>
-              <Link href="/forum">
-                <button>Forum</button>
+              <Link href="/resources">
+                <button>Resources</button>
               </Link>
             </Fragment>
           ) : (
@@ -36,8 +36,8 @@ const Header: FC<Props> = () => {
               <Link href="/user">
                 <button>View Patients</button>
               </Link>
-              <Link href="/forum">
-                <button>Forum</button>
+              <Link href="/resources">
+                <button>Resources</button>
               </Link>
               <button onClick={logout}>Log out</button>
             </Fragment>

@@ -22,7 +22,10 @@ const Details: FC<Props> = ({ talent }) => {
         <div className="font-bold">{talent.name}</div>
         <div>Stage 5 Kidney</div>
         <div>Engineer</div>
-        <div>Linkedin URL: {talent.linkedin_url}</div>
+        <div>
+          Linkedin URL:
+          <a href={talent.linkedin_url}>{talent.linkedin_url}</a>
+        </div>
         <div>Skillsets: {talent.skills.join(", ")}</div>
         <div>
           Open for&nbsp;
