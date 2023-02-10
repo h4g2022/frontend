@@ -1,4 +1,5 @@
 import { FC, Dispatch, SetStateAction, useState } from "react";
+import { useRouter } from "next/router";
 
 interface Props {
   setError: Dispatch<SetStateAction<string>>;
@@ -6,6 +7,7 @@ interface Props {
 
 const Employer: FC<Props> = ({ setError }) => {
   const [company, setCompany] = useState("");
+  const router = useRouter();
 
   const onSubmit = async () => {
     const body = {
@@ -13,7 +15,7 @@ const Employer: FC<Props> = ({ setError }) => {
     };
     const data = JSON.parse(localStorage.getItem("auth")!);
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/me`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/employer/me`,
       {
         method: "PUT",
         body: JSON.stringify(body),
@@ -28,6 +30,8 @@ const Employer: FC<Props> = ({ setError }) => {
       setError("Error creating account");
       return;
     }
+
+    router.push("/");
   };
 
   return (

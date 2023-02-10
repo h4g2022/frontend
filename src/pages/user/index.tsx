@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-import { User } from "@/types/User";
+import { Talent } from "@/types/User";
+import Listing from "./components/Listing";
 
 const Index = () => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<User>();
+  const [data, setData] = useState<Talent[]>();
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/all`)
+    // UserProvider ensures that auth key is present (Temp fix)
+    let value = JSON.parse(localStorage.getItem("auth")!);
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/all`, {
+      headers: {
+        Authorization: `Bearer ${value.access_token}`,
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           return;
@@ -16,15 +22,31 @@ const Index = () => {
         return res.json();
       })
       .then((data) => {
+        setData(data);
         console.log(data);
+      })
+      .catch((e) => {
+        setError("Error loading data");
       });
-  });
+  }, []);
 
   return (
     <div className="section my-12">
       <div className="text-4xl font-semibold mb-8">Users</div>
       <div className="flex flex-col gap-y-6">
-        {!data ? <div>No data</div> : <div></div>}
+        {error ? (
+          <div>{error}</div>
+        ) : data ? (
+          <div className="flex flex-col gap-y-4">
+            {data.map((x: Talent, i: number) => (
+              <Fragment key={i}>
+                <Listing talent={x} />
+              </Fragment>
+            ))}
+          </div>
+        ) : (
+          <div>No data</div>
+        )}
       </div>
     </div>
   );

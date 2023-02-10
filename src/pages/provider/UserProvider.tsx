@@ -6,6 +6,10 @@ export const UserContext = createContext({
   userType: "",
 });
 
+//TODO: Set access token to context
+
+const authRoutes = ["/signup", "/login", "/signup/details"];
+
 const UserProvider = ({
   children,
   publicPaths,
@@ -57,8 +61,14 @@ const UserProvider = ({
         localData.access_token = data.access_token;
         localStorage.setItem("auth", JSON.stringify(localData));
         setUserType(data.user_type);
+        console.log(router.pathname, data);
         if (!data.registered && router.pathname != "/signup/details") {
           await router.push("/signup/details");
+        } else if (
+          data.registered &&
+          authRoutes.indexOf(router.pathname || "") !== -1
+        ) {
+          await router.push("/");
         }
         setLoading(false);
       });

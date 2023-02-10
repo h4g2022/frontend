@@ -1,4 +1,5 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
+import { useRouter } from "next/router";
 import Dropdown from "@/components/Dropdown";
 
 interface Props {
@@ -32,6 +33,7 @@ const Talent: FC<Props> = ({ setError }) => {
   const [linkedin, setLinkedin] = useState("");
   const [displayed, setDisplayed] = useState(false);
   const [availability, setAvailability] = useState([]);
+  const router = useRouter();
 
   const onSubmit = async () => {
     const body = {
@@ -50,6 +52,7 @@ const Talent: FC<Props> = ({ setError }) => {
       treatment_type: "",
     };
 
+    // UserProvider ensures that auth key is present (Temp fix)
     const data = JSON.parse(localStorage.getItem("auth")!);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/me`,
@@ -67,6 +70,8 @@ const Talent: FC<Props> = ({ setError }) => {
       setError("Error creating account");
       return;
     }
+
+    router.push("/");
   };
   return (
     <>
