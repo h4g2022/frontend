@@ -24,6 +24,9 @@ const Header: FC<Props> = () => {
               <Link href="/login">
                 <button>Login</button>
               </Link>
+              <Link href="/signup">
+                <button>Sign up</button>
+              </Link>
               <Link href="/forum">
                 <button>Forum</button>
               </Link>

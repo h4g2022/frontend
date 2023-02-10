@@ -119,9 +119,9 @@ const Index = () => {
             <div className="flex items-center gap-x-2">
               <label>
                 <input
-                  value="patient"
+                  value="talent"
                   type="radio"
-                  checked={type === "patient"}
+                  checked={type === "talent"}
                   onChange={(e) => setType(e.currentTarget.value)}
                 />
                 <span className="ml-2">Talent</span>

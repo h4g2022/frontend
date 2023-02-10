@@ -10,6 +10,9 @@ const Index = () => {
   useEffect(() => {
     // UserProvider ensures that auth key is present (Temp fix)
     let value = JSON.parse(localStorage.getItem("auth")!);
+    if (!value) {
+      return;
+    }
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/talent/all`, {
       headers: {
         Authorization: `Bearer ${value.access_token}`,

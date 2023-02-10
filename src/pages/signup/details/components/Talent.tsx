@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState, ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import Dropdown from "@/components/Dropdown";
 
@@ -33,17 +33,53 @@ const Talent: FC<Props> = ({ setError }) => {
   const [linkedin, setLinkedin] = useState("");
   const [displayed, setDisplayed] = useState(false);
   const [availability, setAvailability] = useState([]);
+  const [image, setImage] = useState<File>();
   const router = useRouter();
+
+  const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const token = JSON.parse(localStorage.getItem("auth")!).access_token;
+    const selectedFile = (e.target as HTMLInputElement).files;
+    const file = selectedFile![0];
+    console.log(file);
+
+    const x = new FormData();
+    x.append("file", file);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/file/upload`,
+        {
+          method: "POST",
+          body: x,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      const data = await res.json();
+      setImage(data.image_id);
+    } catch (e) {
+      console.log("Error");
+    }
+
+    // const reader = new FileReader();
+    // reader.onloadend = () => {
+    //   const url = reader.result as string;
+    //   console.log(url);
+    // };
+    // reader.readAsDataURL(file);
+  };
 
   const onSubmit = async () => {
     const body = {
+      name,
       story: description,
       job_types: [workType],
       job_modes: [jobMode],
       job_title: jobTitle,
       skills: [""],
       availability,
-      photo_url: "string",
+      photo_id: image,
       is_displayed: displayed,
       linkedin_url: linkedin,
       talent_id: 0,
@@ -114,6 +150,15 @@ const Talent: FC<Props> = ({ setError }) => {
             onChange={() => {
               setDisplayed(!displayed);
             }}
+          />
+        </div>
+        <div className="flex items-center gap-x-4">
+          <label>Add profile picture</label>
+          <input
+            id="fileUploader"
+            type="file"
+            accept="image/*"
+            onChange={onImageUpload}
           />
         </div>
       </div>

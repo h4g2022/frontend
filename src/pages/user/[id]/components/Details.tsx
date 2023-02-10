@@ -1,4 +1,5 @@
 import { Talent } from "@/types/User";
+import Image from "next/image";
 import { FC } from "react";
 
 interface Props {
@@ -6,10 +7,16 @@ interface Props {
 }
 
 const Details: FC<Props> = ({ talent }) => {
+  console.log(talent);
   return (
     <div className="section flex my-12">
-      <div className="h-80 w-80 bg-black rounded-full text-white flex justify-center items-center">
-        Profile Picture
+      <div className="rounded-full overflow-hidden">
+        <Image
+          src={talent.photo_url}
+          alt="Profile picture"
+          width="320"
+          height="320"
+        />
       </div>
       <div className="ml-8 flex flex-col gap-y-4 pt-8">
         <div className="font-bold">{talent.name}</div>
