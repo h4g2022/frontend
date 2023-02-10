@@ -53,7 +53,13 @@ const Index = () => {
 
     const data = await res.json();
     router.push("/login");
-
+    localStorage.setItem(
+      "auth",
+      JSON.stringify({
+        access_token: data.access_token,
+        refresh_token: data.refresh_token,
+      })
+    );
     return;
   };
 
@@ -113,9 +119,9 @@ const Index = () => {
             <div className="flex items-center gap-x-2">
               <label>
                 <input
-                  value="talent"
+                  value="patient"
                   type="radio"
-                  checked={type === "talent"}
+                  checked={type === "patient"}
                   onChange={(e) => setType(e.currentTarget.value)}
                 />
                 <span className="ml-2">Talent</span>

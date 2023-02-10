@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 export const UserContext = createContext({
   auth: false,
+  userType: "",
 });
 
 const UserProvider = ({
@@ -13,6 +14,7 @@ const UserProvider = ({
   publicPaths: string[];
 }) => {
   const [auth, setAuth] = useState(false);
+  const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -34,9 +36,9 @@ const UserProvider = ({
       notAuth();
       return;
     }
-
+    console.log(value);
     const localData = JSON.parse(value);
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}auth/refresh`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/refresh`, {
       method: "POST",
       body: JSON.stringify({
         refresh_token: localData.refresh_token,
@@ -50,9 +52,14 @@ const UserProvider = ({
         return;
       }
 
-      return res.json().then((data) => {
+      return res.json().then(async (data) => {
         setAuth(true);
         localData.access_token = data.access_token;
+        localStorage.setItem("auth", JSON.stringify(localData));
+        setUserType(data.user_type);
+        if (!data.registered && router.pathname != "/signup/details") {
+          await router.push("/signup/details");
+        }
         setLoading(false);
       });
     });
@@ -61,7 +68,9 @@ const UserProvider = ({
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <UserContext.Provider value={{ auth }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ auth, userType }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

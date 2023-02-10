@@ -35,6 +35,7 @@ const Index = () => {
 
     if (!res.ok) {
       setError("Invalid credentials");
+      return;
     }
 
     const data = await res.json();

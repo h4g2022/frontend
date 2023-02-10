@@ -6,6 +6,12 @@ interface Props {}
 
 const Header: FC<Props> = () => {
   const { auth } = useContext(UserContext);
+
+  const logout = () => {
+    localStorage.removeItem("auth");
+    window.location.reload();
+  };
+
   return (
     <div className="shadow-lg">
       <header className="flex items-center justify-between w-full h-16 section">
@@ -30,6 +36,7 @@ const Header: FC<Props> = () => {
               <Link href="/forum">
                 <button>Forum</button>
               </Link>
+              <button onClick={logout}>Log out</button>
             </Fragment>
           )}
         </nav>
