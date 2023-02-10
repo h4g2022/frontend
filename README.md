@@ -1,38 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hire4Good Frontend
 
-## Getting Started
+This frontend project is built with NextJS and Typescript.
 
-First, run the development server:
+The goal of this web application is to bridge the gap for kidney patients seeking employment by connecting them with potential employers.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+The application enables employers to communicate with potential employees and access educational resources pertaining to kidney disease, promoting empathy and understanding for the unique challenges faced by kidney patients.
+
+On the other hand, kidney patients can leverage the resources section to further develop their skills and reach out to employers by showcasing their profile. They may share their contact information, such as their email or LinkedIn profile, to facilitate communication with potential employers and open up job opportunities.
+
+## How to run
+
+Run app on local machine
+
+```
+yarn run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run app on [deployed site](https://master--vocal-phoenix-7ad552.netlify.app/)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Views
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. /login
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Login user (Employer/ Talent) to access authenticated pages
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. /signup
 
-## Learn More
+To allow user to sign up as either Employer or Talent
 
-To learn more about Next.js, take a look at the following resources:
+3. /user
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To allow Employers to view all Talents that have profile displayed to public
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. /user/[id]
 
-## Deploy on Vercel
+To display profile of Talent and provide contact information for Employers to contact Talent for job opportunities
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. /resources
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Provides educational resources for employers and patients
+through links to external websites
+
+## Technologies used
+
+- NextJS
+- Typescript
+- Tailwindcss
+- Headlessui
