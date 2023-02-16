@@ -17,7 +17,9 @@ const Index = () => {
   return (
     <div className="section my-8">
       <div className="text-4xl font-semibold">Resources</div>
-      <div className="italic mt-2">Your one stop platform for all</div>
+      <div className="italic mt-2">
+        Your one stop platform for talents and employers
+      </div>
       <hr className="my-8" />
       <div className="mb-8">
         <div className="text-2xl font-bold mb-6">For Employers</div>
