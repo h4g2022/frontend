@@ -17,7 +17,7 @@ const Index: FC<Props> = ({ talent }) => {
       <div>
         <div className="font-bold text-lg">Contact me</div>
         <hr className="my-4" />
-        <div>blabla@mgail.com</div>
+        <div>{talent.email}</div>
       </div>
     </div>
   );

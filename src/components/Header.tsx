@@ -1,4 +1,5 @@
-import { FC, Fragment, useContext, useEffect, useState } from "react";
+import { FC, Fragment, useContext } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { UserContext } from "@/pages/provider/UserProvider";
 
@@ -14,32 +15,34 @@ const Header: FC<Props> = () => {
 
   return (
     <div className="shadow-lg">
-      <header className="flex items-center justify-between w-full h-16 section">
+      <header className="flex items-center justify-between w-full h-16 section px-2 sm:px-5 ">
         <Link href="/" passHref>
-          Homepage
+          <Image src="/images/logo.jpg" alt="Logo" height={340} width={150} />
         </Link>
-        <nav className="flex gap-x-4">
+        <nav className="flex gap-x-4 items-center">
           {!auth ? (
             <Fragment>
               <Link href="/login">
-                <button>Login</button>
+                <button className="text-xs sm:text-md">Login</button>
               </Link>
               <Link href="/signup">
-                <button>Sign up</button>
+                <button className="text-xs sm:text-md">Sign up</button>
               </Link>
               <Link href="/resources">
-                <button>Resources</button>
+                <button className="text-xs sm:text-md">Resources</button>
               </Link>
             </Fragment>
           ) : (
             <Fragment>
               <Link href="/user">
-                <button>View Patients</button>
+                <button className="text-xs sm:text-md">View Patients</button>
               </Link>
               <Link href="/resources">
-                <button>Resources</button>
+                <button className="text-xs sm:text-md">Resources</button>
               </Link>
-              <button onClick={logout}>Log out</button>
+              <button className="text-xs sm:text-md" onClick={logout}>
+                Log out
+              </button>
             </Fragment>
           )}
         </nav>

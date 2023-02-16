@@ -65,7 +65,7 @@ const Index = () => {
 
   return (
     <div className="section flex justify-center h-screen items-center">
-      <div className="w-96 flex flex-col gap-y-6 shadow-2xl border border-1 rounded-3xl p-12">
+      <div className="w-96 flex flex-col gap-y-6 shadow-2xl border border-1 border-black rounded-3xl p-12">
         <div className="flex justify-between items-center">
           <div className="text-2xl">Sign up</div>
           {error && <div className="text-red-300">{error}</div>}
@@ -117,10 +117,11 @@ const Index = () => {
           </label>
           <div className="flex gap-x-2">
             <div className="flex items-center gap-x-2">
-              <label>
+              <label className="cursor-pointer">
                 <input
                   value="talent"
                   type="radio"
+                  className="cursor-pointer"
                   checked={type === "talent"}
                   onChange={(e) => setType(e.currentTarget.value)}
                 />
@@ -128,10 +129,11 @@ const Index = () => {
               </label>
             </div>
             <div className="flex items-center gap-x-2">
-              <label>
+              <label className="cursor-pointer">
                 <input
                   value="employer"
                   type="radio"
+                  className="cursor-pointer"
                   checked={type === "employer"}
                   onChange={(e) => setType(e.currentTarget.value)}
                 />

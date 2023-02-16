@@ -11,3 +11,12 @@
     @apply bg-black px-6 py-4 rounded-xl text-white hover:bg-opacity-80;
   }
 }
+
+html,
+body {
+  background-color: #f7ead7;
+}
+
+hr {
+  border-color: black;
+}

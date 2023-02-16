@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Details: FC<Props> = ({ talent }) => {
-  console.log(talent);
   return (
     <div className="section flex my-12">
       <div className="rounded-full overflow-hidden">
